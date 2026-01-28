@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://s680u5rfapr"]
+[gd_scene load_steps=19 format=4 uid="uid://s680u5rfapr"]
 
 [ext_resource type="Script" uid="uid://o1oh3bssrcs5" path="res://scripts/game_manager.gd" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://cq42r4vlu8pc7" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -199,7 +199,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(320, -43)]
+"values": [Vector2(320, -42)]
 }
 
 [sub_resource type="Animation" id="Animation_4wyf3"]
@@ -213,10 +213,16 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.48, 1.49, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(320, -42), Vector2(415, -43), Vector2(672, -155), Vector2(415, -43)]
+"values": [Vector2(320, -42), Vector2(415, -43)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_71j4m"]
+_data = {
+&"RESET": SubResource("Animation_k0juu"),
+&"move_platform_horizontal": SubResource("Animation_4wyf3")
 }
 
 [sub_resource type="Animation" id="Animation_7r4gi"]
@@ -230,16 +236,30 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 1.49),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(672, -101), Vector2(674, -154)]
+"values": [Vector2(672, -101), Vector2(671, -155)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_71j4m"]
+[sub_resource type="Animation" id="Animation_w7kh3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(673, -101)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e3hyu"]
 _data = {
-&"RESET": SubResource("Animation_k0juu"),
-&"move_platform_horizontal": SubResource("Animation_4wyf3"),
+&"RESET": SubResource("Animation_w7kh3"),
 &"move_platform_vertical": SubResource("Animation_7r4gi")
 }
 
@@ -296,7 +316,7 @@ shape = SubResource("WorldBoundaryShape2D_qfnet")
 position = Vector2(19, -22)
 
 [node name="platform2" parent="Platforms" instance=ExtResource("3_4wyf3")]
-position = Vector2(320, -43)
+position = Vector2(320, -42)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/platform2"]
 libraries = {
@@ -305,11 +325,11 @@ libraries = {
 autoplay = "move_platform_horizontal"
 
 [node name="platform3" parent="Platforms" instance=ExtResource("3_4wyf3")]
-position = Vector2(320, -43)
+position = Vector2(673, -101)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/platform3"]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Platforms/platform3"]
 libraries = {
-&"": SubResource("AnimationLibrary_71j4m")
+&"": SubResource("AnimationLibrary_e3hyu")
 }
 autoplay = "move_platform_vertical"
 
