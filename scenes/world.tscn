@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://s680u5rfapr"]
+[gd_scene load_steps=20 format=4 uid="uid://s680u5rfapr"]
 
 [ext_resource type="Script" uid="uid://o1oh3bssrcs5" path="res://scripts/game_manager.gd" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://cq42r4vlu8pc7" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b0bi0pd5i0jbl" path="res://scenes/killzone.tscn" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cxy81tsucj3hf" path="res://scenes/slime.tscn" id="6_qfnet"]
 [ext_resource type="FontFile" uid="uid://buik3o8qmi4ie" path="res://assets/fonts/PixelOperator8.ttf" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://b8oa06di4uiss" path="res://scenes/heartui.tscn" id="10_w7kh3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4wyf3"]
 texture = ExtResource("2_rwgxs")
@@ -225,6 +226,21 @@ _data = {
 &"move_platform_horizontal": SubResource("Animation_4wyf3")
 }
 
+[sub_resource type="Animation" id="Animation_w7kh3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(673, -101)]
+}
+
 [sub_resource type="Animation" id="Animation_7r4gi"]
 resource_name = "move_platform_vertical"
 length = 1.5
@@ -240,21 +256,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(672, -101), Vector2(671, -155)]
-}
-
-[sub_resource type="Animation" id="Animation_w7kh3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(673, -101)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e3hyu"]
@@ -305,7 +306,7 @@ limit_bottom = 75
 limit_smoothed = true
 
 [node name="killzone" parent="." instance=ExtResource("5_71j4m")]
-position = Vector2(42, 74)
+position = Vector2(42, 83)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 position = Vector2(0, -1)
@@ -403,3 +404,11 @@ text = "Collect all mushrooms to win
 Each level has exactly one mushroom
 Beware of sign boards (they hint that the mushroom is around!)"
 autowrap_mode = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("10_w7kh3")]
+offset_left = -107.0
+offset_top = -39.0
+offset_right = -67.0
+offset_bottom = 1.0
