@@ -5,7 +5,7 @@ const SPEED = 130.0
 const ROLL_SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+var alive: = true
 
 func _physics_process(delta: float) -> void: # the _physics_process() function is different from a normal _process() function cause it runs at a fixed rate which 60 times per second by default (this is independent of your game's actual frame rate)
 	# Add the gravity.
@@ -43,3 +43,11 @@ func _physics_process(delta: float) -> void: # the _physics_process() function i
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func die():
+	if not alive:
+		return
+	alive = false
+	
+	animated_sprite_2d.play("die")
+	set_physics_process(false)
